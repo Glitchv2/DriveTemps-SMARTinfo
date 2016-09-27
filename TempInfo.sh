@@ -13,16 +13,16 @@ echo "$logdate"
 #Check to see if logfile exists
 if ls /scripts/smartlogs/* 1> /dev/null 2>&1; then
 
-		#If it's found it's deleted, and re-created
+	#If it's found it's deleted, and re-created
         echo "Logfile found! Deleting..."
-				rm "/scripts/smartlogs/smartlog"*
+	rm "/scripts/smartlogs/smartlog"*
         sleep 5
         echo "Logfile deleted..."
         echo "Creating new logfile."
         touch "/scripts/smartlogs/smartlog+${logdate}.log"
 else
 
-				#Otherwise it creates the logfile
+	#Otherwise it creates the logfile
         echo "No logfile found"
         echo "Creating new logfile."
         touch "/scripts/smartlogs/smartlog+${logdate}.log"
@@ -54,24 +54,26 @@ for x in $( seq 0 $drivecount ); do
 	
 	#Check exit code of above command
 	#if exit code does not equal 0, then skip drive
-	if [ $? -ne "0" ]; then
-		#Do not attempt to test the drive
-		#Will keep the drive asleep
+	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
 		echo "ada${x} is currently asleep and was not tested!" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 		continue
 	
-	else
-		#Drive is awake and ready to be tested
-		echo ""
+	else  #Drive is awake and ready to be tested
+	echo ""
 		#Prints the drive number, date, and time
-		echo "ada${x} results @ ${logtime}" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	echo "ada${x} results @ ${logtime}" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	
 		#Print the Temp of the drive.
         smartctl -n standby -A /dev/ada${x} | grep -ie "temp" | awk '$10 {print "Drive temp: "($10)" celsius"}' >> "/scripts/smartlogs/smartlog+${logdate}.log"
-        #Print the Serial No. of the drive.
+	
+        	#Print the Serial No. of the drive.
         smartctl -n standby -i /dev/ada${x} | grep -i -e "serial" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	
 		#Prints out important drive SMART info.
         smartctl -n standby -a /dev/ada${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	fi
