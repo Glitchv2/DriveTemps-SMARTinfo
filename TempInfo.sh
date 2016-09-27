@@ -11,7 +11,7 @@ echo "$TOD"
 echo "$logdate"
 
 #Check to see if logfile exists
-if ls /scripts/smartlogs/* 1> /dev/null 2>&1; then
+if ls /scripts/smartlogs/smartlog* 1> /dev/null 2>&1; then
 
 	#If it's found it's deleted, and re-created
         echo "Logfile found! Deleting..."
