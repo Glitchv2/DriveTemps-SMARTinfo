@@ -32,7 +32,7 @@ for x in $( seq 0 $drivecount ); do
 	else
 		#Drive is awake and ready to be tested
 		echo ""
-		smartctl -n standby -A /dev/ada${x} | grep -ie "temp" | awk '$10 {print "Drive temp: "($10)" celsius"}'
-		smartctl -n standby -i /dev/ada${x} | grep -i -e "serial"		
+		smartctl -a /dev/ada${x} | grep -ie "temp" | awk '$10 {print "Drive temp: "($10)" celsius"}'
+		smartctl -i /dev/ada${x} | grep -i -e "serial"		
 	fi
 done
