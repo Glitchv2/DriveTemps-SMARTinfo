@@ -39,40 +39,40 @@ echo >> "/scripts/smartlogs/smartlog+${logdate}.log"
 
 
 #Count number of drives and echo
-drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
+drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
 
 #Since it starts with 1 instead of 0
 drivecount=$((drivecount-1))
 
-echo "Number of drives counted via 'ada': ${drivecount}"
+echo "Number of drives counted via 'da': ${drivecount}"
 sleep 5
 
-#Loop checks ada0 - ada${drivecount}
+#Loop checks da0 - da${drivecount}
 for x in $( seq 0 $drivecount ); do
 	#First check if drive is awake or not
-	smartctl -n standby /dev/ada${x}
+	smartctl -n standby /dev/da${x}
 	
 	#Check exit code of above command
 	#if exit code does not equal 0, then skip drive
 	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
-		echo "ada${x} is currently asleep and was not tested!" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+		echo "da${x} is currently asleep and was not tested!" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 		continue
 	
 	else  #Drive is awake and ready to be tested
 	echo ""
 		#Prints the drive number, date, and time
-	echo "ada${x} results @ ${logtime}" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+	echo "da${x} results @ ${logtime}" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	
 		#Print the Temp of the drive.
-        smartctl -n standby -A /dev/ada${x} | grep -ie "temp" | awk '$10 {print "Drive temp: "($10)" celsius"}' >> "/scripts/smartlogs/smartlog+${logdate}.log"
+        smartctl -A /dev/da${x} | grep -ie "temp" | awk '$10 {print "Drive temp: "($10)" celsius"}' >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	
         	#Print the Serial No. of the drive.
-        smartctl -n standby -i /dev/ada${x} | grep -i -e "serial" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+        smartctl -i /dev/da${x} | grep -i -e "serial" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	
 		#Prints out important drive SMART info.
-        smartctl -n standby -a /dev/ada${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un" >> "/scripts/smartlogs/smartlog+${logdate}.log"
+        smartctl -a /dev/da${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un" >> "/scripts/smartlogs/smartlog+${logdate}.log"
 	
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
         echo "" >> "/scripts/smartlogs/smartlog+${logdate}.log"
