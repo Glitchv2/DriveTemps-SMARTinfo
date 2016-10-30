@@ -107,7 +107,7 @@ sleep 2
 #Loop checks da0 - da${drivecount}
 for x in $( seq 0 $drivecount ); do
 	#First check if drive is awake or not
-	smartctl -n standby /dev/${drivelocal}${x}
+	smartctl -n standby /dev/${drivelocal}${x} | grep "Device"
 	
 	#Check exit code of above command, if exit code does not equal 0, then skip drive
 	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
