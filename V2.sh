@@ -20,7 +20,7 @@ else
       done
 fi
 
-#Sets Number of drives count
+#Checks both 'da' and 'ada' for drives.
 da="$(ls /dev/ | grep -c '\bda[0-9]\b')"
 ada="$(ls /dev/ | grep -c '\bada[0-9]\b')"
 
@@ -77,10 +77,9 @@ logdate=`date "+%m-%d-%Y"`
 #Sets the time for the log file contents
 logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 
-clear
-
 echo "Processor Core Count: " $corecount
-echo "Count of da/ada Drives: " $drivecount
+sysctl -a | grep "dev.cpu.*.temperature" | awk '{print $2}' | awk '{ SUM+= $1/$corecount} END { print "Average Core temp: " SUM "C"}'
+echo "Number of Drives: " $drivecount
 uptime | awk '{print "System Load  1 minute: " $10}'
 uptime | awk '{print "System Load  5 minute: " $11}'
 uptime | awk '{print "System Load 15 minute: " $12}'
