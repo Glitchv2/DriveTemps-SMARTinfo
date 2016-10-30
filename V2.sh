@@ -2,8 +2,20 @@
 set -x
 #Set variables:
 
-#Sets CPU core count
+#Sets CPU core count and check <0
 corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
+
+if [ "$corecount" -gt 0 ]
+then
+    continue
+    else
+    echo "Could not count cores! Would you like to continue?"
+    select yn in "Yes" "No"; do
+      case $yn in
+        Yes ) continue
+        No ) exit 1
+      esac
+fi
 
 #Sets Number of drives count
 drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
