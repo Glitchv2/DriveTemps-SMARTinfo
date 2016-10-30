@@ -16,8 +16,9 @@ then
         read -p " Would you like to continue?" yn
         case $yn in
           [Yy]* ) continue;;
-          [Nn]* ) echo "Unable to count cores!" exit 1
+          [Nn]* ) echo "Unable to count cores!"
         esac
+        exit 1
       done
 fi
 
