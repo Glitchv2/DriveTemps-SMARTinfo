@@ -1,10 +1,14 @@
 #!/bin/bash/
 
-#set -x
+set -x
 
 #Set variables:
 
-#Sets CPU core count and check <0
+#Logging enabled? [yes] or [no]
+#Not used as of right now, will be logging to /scripts/logging
+logging="no"
+
+#Sets CPU core count
 corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
 
 #Catches if script was unable to count cpu's
@@ -29,6 +33,9 @@ ada="$(ls /dev/ | grep -c '\bada[0-9]\b')"
 #Drive count var
 drivecount="0"
 
+#Which device? [da] or [ada]
+drivelocal=""
+
 #checks if 'da' has a drive count
 #if 'da' has a count, sets variable to count
 #else if 'da' is Zero/Null checks 'ada'
@@ -38,10 +45,12 @@ drivecount="0"
 if [ $da -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
   echo "Using 'da' drive count"
+  drivelocal="da"
   continue
 elif [ $ada -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
   echo "Using 'ada' drive count"
+  drivelocal="ada"
   continue
 else
   echo "Unable to count drives!"
@@ -79,6 +88,8 @@ logdate=`date "+%m-%d-%Y"`
 #Sets the time for the log file contents
 logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 
+#Now to actually do some things!
+
 echo "Processor Core Count: " $corecount
 
 #greps all tempatures from all cores, adds together, then divides by number of cores
@@ -88,5 +99,12 @@ echo "Number of Drives: " $drivecount
 uptime | awk '{print "System Load  1 minute: " $10}'
 uptime | awk '{print "System Load  5 minute: " $11}'
 uptime | awk '{print "System Load 15 minute: " $12}'
+
+#Pause 2 sec, do things look right?
+sleep 2
+
+echo "dev/da1"
+smartctl -a /dev/da1 | grep -e "Device Model:"
+smartctl -a /dev/da0 | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
 
 exit 0
