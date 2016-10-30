@@ -1,5 +1,7 @@
 #!/bin/bash/
-set -x
+
+#set -x
+
 #Set variables:
 
 #Sets CPU core count and check <0
@@ -78,7 +80,10 @@ logdate=`date "+%m-%d-%Y"`
 logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 
 echo "Processor Core Count: " $corecount
+
+#greps all tempatures from all cores, adds together, then divides by number of cores
 sysctl -a | grep "dev.cpu.*.temperature" | awk '{print $2}' | awk -v corecount="$corecount" '{ SUM+= $1/corecount} END { print "Average Core temp: " SUM "C"}'
+
 echo "Number of Drives: " $drivecount
 uptime | awk '{print "System Load  1 minute: " $10}'
 uptime | awk '{print "System Load  5 minute: " $11}'
