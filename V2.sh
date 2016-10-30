@@ -81,8 +81,8 @@ clear
 
 echo "Processor Core Count: " $corecount
 echo "Count of da/ada Drives: " $drivecount
-echo "System Load 1 minute: " uptime | awk '{print $8}'
-echo "System Load 5 minute: " uptime | awk '{print $9}'
-echo "System Load 10 minute: " uptime | awk '{print $10}'
+uptime | awk '{print "System Load  1 minute: " $8}'
+uptime | awk '{print "System Load  5 minute: " $9}'
+uptime | awk '{print "System Load 15 minute: " $10}'
 
 exit 0
