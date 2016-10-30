@@ -13,7 +13,7 @@ else
       while true; do
         read -p " Would you like to continue?" yn
         case $yn in
-          [Yy]* ) continue;;
+          [Yy]* ) break;;
           [Nn]* ) echo "Ending my life!"
         esac
         exit 126 && echo $?
@@ -41,7 +41,7 @@ else
         while true; do
         read -p " Would you like to continue?" yn
         case $yn in
-          [Yy]* ) continue;;
+          [Yy]* ) break;;
           [Nn]* ) echo "Ending my life!"
         esac
         exit 126 && echo $?
@@ -56,7 +56,7 @@ if [ "$drivecount" -gt 0 ] ; then
       while true; do
         read -p " Would you like to continue?" yn
         case $yn in
-          [Yy]* ) continue;;
+          [Yy]* ) break;;
           [Nn]* ) echo "Ending my life!"
         esac
         exit 126 && echo $?
