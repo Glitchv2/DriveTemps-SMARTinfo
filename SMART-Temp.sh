@@ -42,7 +42,8 @@ echo >> "/scripts/smartlogs/smartlog+${logdate}.log"
 drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
 
 #Since it starts with 1 instead of 0
-drivecount=$((drivecount-1))
+#No longer needed due to changing from ada to da for /dev/
+#drivecount=$((drivecount-1))
 
 echo "Number of drives counted via 'da': ${drivecount}"
 sleep 5
