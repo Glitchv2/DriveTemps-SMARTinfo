@@ -113,23 +113,19 @@ for x in $( seq 0 $drivecount ); do
 	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
 		echo "${drivelocal}${x} is currently asleep and was not tested!"
 		continue
-	
 	else  #Drive is awake and ready to be tested
 	echo ""
-		#Prints the drive number, date, and time
+	#Prints the drive number, date, and time
 	echo "${drivelocal}${x}"
-	
-	#Print the Temp of the drive.
-    smartctl -a /dev/${drivelocal}${x}} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
-
     #Print Device Model
     smartctl -a /dev/${drivelocal}${x} | grep -e "Device Model:"
-	
-		#Prints out important drive SMART info.
-        #smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
-		echo ""
-		echo ""
-		echo ""
+	#Print the Temp of the drive.
+    smartctl -a /dev/${drivelocal}${x}} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
+	#Prints out important drive SMART info.
+    #smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
+	echo ""
+	echo ""
+	echo ""
 	fi
 done
 
