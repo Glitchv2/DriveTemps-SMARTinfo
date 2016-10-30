@@ -112,6 +112,7 @@ for x in $( seq 0 $drivecount ); do
 	#Check exit code of above command, if exit code does not equal 0, then skip drive
 	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
 		echo "${drivelocal}${x} is currently asleep and was not tested!"
+		echo ""
 		continue
 	else  #Drive is awake and ready to be tested
 	#Prints the drive number, date, and time
