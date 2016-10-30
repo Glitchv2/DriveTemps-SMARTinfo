@@ -13,7 +13,7 @@ then
       while true; do
         read -p " Would you like to continue?" yn
         case $yn in
-          [Yy]* ) continue;
+          [Yy]* ) continue;;
           [Nn]* ) echo "Unable to count cores!" exit 1
         esac
       done
