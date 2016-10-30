@@ -20,7 +20,7 @@ logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 #Clears the screen from all printouts
 clear
 
-echo "Processor Core Count: " $"corecount"
+echo "Processor Core Count: " $corecount
 echo $TOD
 echo $drivecount
 exit 0
