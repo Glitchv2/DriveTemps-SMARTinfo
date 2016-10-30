@@ -1,4 +1,4 @@
-#!/bin/bash/
+w#!/bin/bash/
 set -x
 #Set variables:
 
@@ -9,12 +9,14 @@ if [ "$corecount" -gt 0 ]
 then
     continue
     else
-    echo "Could not count cores! Would you like to continue?"
-    select yn in "Yes" "No"; do
-      case $yn in
-        Yes ) continue
-        No ) exit 1
-      esac
+    echo "Could not count cores!"
+      while true; do
+        read -p " Would you like to continue?" yn
+        case $yn in
+          [Yy]* ) continue;
+          [Nn]* ) echo "Unable to count cores!" exit 1
+        esac
+      done
 fi
 
 #Sets Number of drives count
