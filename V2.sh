@@ -3,7 +3,7 @@ set -x
 #Set variables:
 
 #Sets CPU core count
-corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")
+corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
 
 #Sets Number of drives count
 drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
