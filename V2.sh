@@ -21,6 +21,6 @@ logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 clear
 
 echo "Processor Core Count: " $"corecount"
-echo $"TOD"
-echo $"drivecount"
+echo $TOD
+echo $drivecount
 exit 0
