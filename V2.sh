@@ -37,7 +37,7 @@ elif [ ls /dev/ | grep -c '\bada[0-9]\b' ] -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
   continue
 else
-  echo "Unable to count drives!
+  echo "Unable to count drives!"
         while true; do
         read -p " Would you like to continue?" yn
         case $yn in
