@@ -3,7 +3,9 @@ set -x
 #Set variables:
 
 #Sets CPU core count and check <0
-corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
+#corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
+
+corecout="0"
 
 if [ "$corecount" -gt 0 ]
 then
