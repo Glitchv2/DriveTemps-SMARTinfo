@@ -134,13 +134,8 @@ for x in $( seq 0 $drivecount ); do
 	fi
 done
 
-
-
-
-
-
-echo "dev/da1"
-smartctl -a /dev/da1 | grep -e "Device Model:"
-smartctl -a /dev/da0 | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
+#echo "dev/da1"
+#smartctl -a /dev/da1 | grep -e "Device Model:"
+#smartctl -a /dev/da0 | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
 
 exit 0
