@@ -21,8 +21,11 @@ else
 fi
 
 #Sets Number of drives count
-#drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
+da="$(ls /dev/ | grep -c '\bda[0-9]\b')"
+ada="$(ls /dev/ | grep -c '\bada[0-9]\b')"
 
+#Drive count var
+drivecount="0"
 
 #checks if 'da' has a drive count
 #if 'da' has a count, sets variable to count
@@ -30,11 +33,13 @@ fi
 #if 'ada' has a count, sets variable to count
 #else unable to count drive, asks to continue
 
-if [ ls /dev/ | grep -c '\bda[0-9]\b' -gt 0 ] ; then
+if [ $da -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
+  echo "Using 'da' drive count"
   continue
-elif [ ls /dev/ | grep -c '\bada[0-9]\b' -gt 0 ] ; then
+elif [ $ada -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
+  echo "Using 'ada' drive count"
   continue
 else
   echo "Unable to count drives!"
