@@ -30,10 +30,10 @@ fi
 #if 'ada' has a count, sets variable to count
 #else unable to count drive, asks to continue
 
-if [ ls /dev/ | grep -c '\bda[0-9]\b' ] -gt 0 ] ; then
+if [ ls /dev/ | grep -c '\bda[0-9]\b' -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
   continue
-elif [ ls /dev/ | grep -c '\bada[0-9]\b' ] -gt 0 ] ; then
+elif [ ls /dev/ | grep -c '\bada[0-9]\b' -gt 0 ] ; then
   drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
   continue
 else
