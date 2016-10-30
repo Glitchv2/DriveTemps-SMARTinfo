@@ -103,6 +103,42 @@ uptime | awk '{print "System Load 15 minute: " $12}'
 #Pause 2 sec, do things look right?
 sleep 2
 
+
+#Loop checks da0 - da${drivecount}
+for x in $( seq 0 $drivecount ); do
+	#First check if drive is awake or not
+	smartctl -n standby /dev/${drivelocal}${x}
+	
+	#Check exit code of above command
+	#if exit code does not equal 0, then skip drive
+	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
+		echo "${drivelocal}${x} is currently asleep and was not tested!"
+		break
+	
+	else  #Drive is awake and ready to be tested
+	echo ""
+		#Prints the drive number, date, and time
+	echo "${drivelocal}${x}"
+	
+		#Print the Temp of the drive.
+        smartctl -A /dev/${drivelocal}${x}} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
+
+        #Print Device Model
+        smartctl -i /dev/${drivelocal}${x} | grep -e "Device Model:"
+	
+		#Prints out important drive SMART info.
+        #smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
+		echo ""
+		echo ""
+		echo ""
+	fi
+done
+
+
+
+
+
+
 echo "dev/da1"
 smartctl -a /dev/da1 | grep -e "Device Model:"
 smartctl -a /dev/da0 | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
