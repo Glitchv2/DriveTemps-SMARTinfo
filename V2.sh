@@ -1,9 +1,7 @@
 #!/bin/bash/
-
 #set -x
 
-#Set variables:
-
+#Setting variables:
 #Logging enabled? [yes] or [no]
 #Not used as of right now, will be logging to /scripts/logging
 logging="no"
@@ -106,8 +104,8 @@ sleep 2
 
 #Loop checks da0 - da${drivecount}
 for x in $( seq 0 $drivecount ); do
-	#First check if drive is awake or not
-	smartctl -n standby /dev/${drivelocal}${x} | grep "Device"
+	#First check if drive is awake or not, dumping all messages to /dev/null, but still retaining error code
+	smartctl -n standby /dev/${drivelocal}${x} >> /dev/null
 	
 	#Check exit code of above command, if exit code does not equal 0, then skip drive
 	if [ $? -ne "0" ]; then #Do not attempt to test the drive and keep the drive asleep.
@@ -115,17 +113,17 @@ for x in $( seq 0 $drivecount ); do
 		echo ""
 		continue
 	else  #Drive is awake and ready to be tested
-	#Prints the drive number, date, and time
-	echo "${drivelocal}${x}"
-    #Print Device Model
-    smartctl -a /dev/${drivelocal}${x} | grep -e "Device Model:"
-	#Print the Temp of the drive.
-    smartctl -a /dev/${drivelocal}${x} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
-	#Prints out important drive SMART info.
-    #smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
-	echo ""
-	echo ""
-	echo ""
+		#Prints the drive number, date, and time
+		echo "${drivelocal}${x}"
+		#Print Device Model
+		smartctl -a /dev/${drivelocal}${x} | grep -e "Device Model:"
+		#Print the Temp of the drive.
+		smartctl -a /dev/${drivelocal}${x} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
+		#Prints out important drive SMART info.
+		#smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
+		echo ""
+		echo ""
+		echo ""
 	fi
 done
 
