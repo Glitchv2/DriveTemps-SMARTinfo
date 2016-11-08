@@ -3,7 +3,6 @@
 #Sets variables
 TOD=`date "+DATE: %m-%d-%Y%nTime: %H:%M:%S"`
 logdate=`date "+%m-%d-%Y"`
-logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 drivecount=""
 
 #Shows variables to verify they're correct
@@ -52,6 +51,9 @@ sleep 5
 for x in $( seq 0 $drivecount ); do
 	#First check if drive is awake or not
 	smartctl -n standby /dev/da${x}
+	
+	#Sets the 
+	logtime=`date "+%m-%d-%Y  %H:%M:%S"`
 	
 	#Check exit code of above command
 	#if exit code does not equal 0, then skip drive
