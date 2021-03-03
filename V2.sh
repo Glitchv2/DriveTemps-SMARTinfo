@@ -44,12 +44,12 @@ drivelocal=""
 #else unable to count drive, asks to continue
 
 if [ $da -gt 0 ] ; then
-  drivecount="$(ls /dev/ | grep -c '\bda[0-9]\b')"
+  drivecount="$(camcontrol devlist | grep -c \<ATA)"
   echo "Using 'da' drive count"
   drivelocal="da"
   continue
 elif [ $ada -gt 0 ] ; then
-  drivecount="$(ls /dev/ | grep -c '\bada[0-9]\b')"
+  drivecount="$(camcontrol devlist | grep -c \<ATA)"
   echo "Using 'ada' drive count"
   drivelocal="ada"
   continue
