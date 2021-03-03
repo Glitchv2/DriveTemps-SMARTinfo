@@ -122,6 +122,11 @@ for x in $( seq 0 $drivecount ); do
 		smartctl -a /dev/${drivelocal}${x} | grep -e "Device Model:"
 		#Print the Temp of the drive.
 		smartctl -a /dev/${drivelocal}${x} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
+		
+		#Print the Hours on of the drive.
+		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Hours: " $10 }'
+		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Days: " $10/24 }'
+		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Years: " $10/24/365 }'
 		#Prints out important drive SMART info.
 		smartctl -a /dev/${drivelocal}${x} | grep -i -e "  9 Power_On" -e "  1 raw_read" -e "  5 reallocated" -e "  7 seek" -e " 10 spin" -e "197 current_pending" -e "198 offline_un" -e "199 _UDMA_CRC"
 		echo ""
