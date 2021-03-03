@@ -123,7 +123,7 @@ for x in $( seq 0 $drivecount ); do
 		#Print the Temp of the drive.
 		smartctl -a /dev/${drivelocal}${x} | grep -e "194 Temp*" | awk '{print "Temp: " $10 "C"}'
 		#Prints out important drive SMART info.
-		#smartctl -a /dev/${drivelocal}${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un"
+		#smartctl -a /dev/${drivelocal}${x} | grep -i -e "  1 raw_read" -e "  5 reallocated" -e "  7 seek" -e " 10 spin" -e "197 current_pending" -e "198 offline_un"
 		echo ""
 		echo ""
 		echo ""
