@@ -3,11 +3,14 @@
 
 #Setting variables:
 #Logging enabled? [yes] or [no]
-#Not used as of right now, will be logging to /scripts/logging
+#Not used as of right now, will be logging to /Scripts/NAS-Scripts/logging
 logging="no"
 
+sysctl hw.model | awk {'first = $1; $1=""; print $0'}|sed 's/^ //g'
+sysctl hw.machine | awk {'first = $1; $1=""; print $0'}|sed 's/^ //g'
+
 #Sets CPU core count
-corecount="$(sysctl -a | grep -c "dev.cpu.*.temperature")"
+corecount="$(sysctl hw.ncpu | awk '{print $2}')"
 
 #Catches if script was unable to count cpu's
 if [ "$corecount" -gt 0 ] ; then
