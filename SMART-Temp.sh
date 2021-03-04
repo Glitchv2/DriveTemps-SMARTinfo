@@ -76,12 +76,12 @@ for x in $( seq 0 $drivecount ); do
         echo "" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 		
 		#Print the Hours on of the drive.
-		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Hours: " $10 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
-		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Days: " $10/24 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
-		smartctl -a /dev/${drivelocal}${x} | grep -e "  9 Power_On" | awk '{print "Years: " $10/24/365 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+		smartctl -a /dev/da${x} | grep -e "  9 Power_On" | awk '{print "Hours: " $10 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+		smartctl -a /dev/da${x} | grep -e "  9 Power_On" | awk '{print "Days: " $10/24 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+		smartctl -a /dev/da${x} | grep -e "  9 Power_On" | awk '{print "Years: " $10/24/365 }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 	
 		#Prints out important drive SMART info.
-        smartctl -a /dev/da${x} | grep -i -e "raw_read" -e "reallocated" -e "seek" -e "spin" -e "current_pending" -e "offline_un" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+        smartctl -a /dev/da${x} | grep -i -e "  9 Power_On" -e "  1 raw_read" -e "  5 reallocated" -e "  7 seek" -e " 10 spin" -e "197 current_pending" -e "198 offline_un" -e "199 _UDMA_CRC" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 	
         echo "" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
         echo "" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
