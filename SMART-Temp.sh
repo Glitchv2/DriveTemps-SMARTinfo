@@ -13,18 +13,18 @@ echo "$logdate"
 if ls /scripts/smartlogs/smartlog* 1> /dev/null 2>&1; then
 
 	#If it's found it's deleted, and re-created
-        echo "Logfile found! Deleting..."
+    echo "Logfile found! Deleting..."
 	rm "/scripts/smartlogs/smartlog"*
-        sleep 5
-        echo "Logfile deleted..."
-        echo "Creating new logfile."
-        touch /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+    sleep 5
+    echo "Logfile deleted..."
+    echo "Creating new logfile."
+    touch /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 else
 
 	#Otherwise it creates the logfile
-        echo "No logfile found"
-        echo "Creating new logfile."
-        touch /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+    echo "No logfile found"
+    echo "Creating new logfile."
+    touch /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 fi
 
 
