@@ -44,7 +44,7 @@ drivecount="$(camcontrol devlist | grep -c \<ATA)"
 #No longer needed due to changing from ada to da for /dev/
 #drivecount=$((drivecount-1))
 
-echo "Number of drives counted via 'da': ${drivecount}"
+#echo "Number of drives counted via 'da': ${drivecount}"
 sleep 5
 
 #Loop checks da0 - da${drivecount}
