@@ -30,7 +30,9 @@ fi
 
 
 
-uptime | awk '{ print "\nSystem Load:",$8,$9,$10,"\n" }' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+uptime | awk '{print "System Load  1 minute: " $10}' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+uptime | awk '{print "System Load  5 minute: " $11}' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+uptime | awk '{print "System Load 15 minute: " $12}' >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 echo "CPU Temperature:" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 sysctl -a | egrep -E "cpu\.[0-9]+\.temp" >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 echo >> "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
