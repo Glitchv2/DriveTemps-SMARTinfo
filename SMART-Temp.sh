@@ -62,9 +62,9 @@ for x in $( seq 0 $drivecount ); do
 		continue
 	
 	else  #Drive is awake and ready to be tested
-	echo ""
+		echo ""
 		#Prints the drive number, date, and time
-	echo "da${x} results @ ${logtime}" >> /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
+		echo "da${x} results @ ${logtime}" >> /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 	
 	    #Print the Serial No. of the drive.
         smartctl -i /dev/da${x} | grep -i -e "serial" >> /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
