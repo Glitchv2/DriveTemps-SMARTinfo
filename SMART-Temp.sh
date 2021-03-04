@@ -61,7 +61,7 @@ for x in $( seq 0 $drivecount ); do
 		echo "da${x} is currently asleep and was not tested!" >> /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
 		continue
 	
-	else  #Drive is awake and ready to be tested
+		else  #Drive is awake and ready to be tested
 		echo ""
 		#Prints the drive number, date, and time
 		echo "da${x} results @ ${logtime}" >> /Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"
