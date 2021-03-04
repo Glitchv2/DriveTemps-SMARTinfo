@@ -14,7 +14,7 @@ if ls /scripts/smartlogs/smartlog* 1> /dev/null 2>&1; then
 
 	#If it's found it's deleted, and re-created
     echo "Logfile found! Deleting..."
-	#rm "/Scripts/NAS-Scripts/smartlogs/*"
+	rm "/Scripts/NAS-Scripts/smartlogs/*"
     sleep 5
     #echo "Logfile deleted..."
     echo "Creating new logfile."
