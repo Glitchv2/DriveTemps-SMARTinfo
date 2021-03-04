@@ -89,5 +89,5 @@ for x in $( seq 0 $drivecount ); do
 done
 
 #Emails root and Users the logfile.
-cat "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"; uuencode "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log" "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log") | mail -s "Drive Info" root
+(cat "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log"; uuencode "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log" "/Scripts/NAS-Scripts/smartlogs/smartlog+${logdate}.log") | mail -s "Drive Info" root
 
